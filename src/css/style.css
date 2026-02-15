@@ -1470,6 +1470,972 @@ html, body {
     border-color: #228B22;
 }
 
+/* ===== PIZZA GAME ===== */
+.pizza-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+}
+
+/* Customer Section */
+.pizza-customer-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.pizza-customer {
+    width: 100px;
+    height: 100px;
+    font-size: 70px;
+    background: #fff;
+    border: 5px solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 0 #333, 0 10px 30px rgba(0,0,0,0.2);
+    animation: customerBounce 2s ease infinite;
+}
+
+@keyframes customerBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.pizza-speech-bubble {
+    background: #fff;
+    border: 4px solid #333;
+    border-radius: 20px;
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 4px 0 #333;
+    position: relative;
+    max-width: 250px;
+}
+
+.pizza-speech-bubble::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-right-color: #333;
+}
+
+.pizza-speech-bubble::after {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-right-color: #fff;
+}
+
+/* Model Section */
+.pizza-model-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pizza-model-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #333;
+}
+
+.pizza-model-box {
+    width: 150px;
+    height: 150px;
+    background: #8B4513;
+    border: 5px solid #333;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 6px 0 #333, 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.pizza-model-base {
+    width: 100%;
+    height: 100%;
+    background: #F4A460;
+    border-radius: 50%;
+    border: 3px solid #654321;
+    position: relative;
+    overflow: hidden;
+}
+
+.pizza-model-ingredient {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    border: 2px solid #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Game Area */
+.pizza-game-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pizza-base {
+    width: 350px;
+    height: 350px;
+    background: #F4A460;
+    border: 8px solid #8B4513;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 
+        inset 0 0 30px rgba(0,0,0,0.2),
+        0 10px 0 #654321,
+        0 15px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+    touch-action: none;
+}
+
+.pizza-base.pizza-cooked {
+    background: linear-gradient(135deg, #D2691E 0%, #CD853F 50%, #D2691E 100%);
+    animation: pizzaCooked 0.5s ease;
+}
+
+@keyframes pizzaCooked {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Ghost Shadows */
+.pizza-ghost-shadow {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 50%;
+    border: 3px dashed rgba(0,0,0,0.3);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* Placed Ingredients */
+.pizza-placed-ingredient {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    border: 3px solid #333;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    animation: ingredientPlaced 0.3s ease;
+}
+
+@keyframes ingredientPlaced {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Cook Button */
+.pizza-cook-button {
+    margin-top: 20px;
+    padding: 20px 40px;
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ff6347 0%, #ff4500 100%);
+    color: #fff;
+    border: 5px solid #333;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #333, 0 10px 30px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.pizza-cook-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #333, 0 13px 35px rgba(0,0,0,0.4);
+}
+
+.pizza-cook-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #333, 0 7px 20px rgba(0,0,0,0.3);
+}
+
+.pizza-cook-button.pizza-show-cook {
+    animation: cookButtonAppear 0.5s ease;
+}
+
+@keyframes cookButtonAppear {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Oven Overlay */
+.pizza-oven-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.pizza-oven-content {
+    text-align: center;
+    color: #fff;
+}
+
+.pizza-oven-icon {
+    font-size: 120px;
+    animation: ovenFlame 0.5s ease infinite alternate;
+}
+
+@keyframes ovenFlame {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+.pizza-oven-text {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-shadow: 3px 3px 0 #333;
+}
+
+.pizza-steam {
+    font-size: 60px;
+    animation: steamRise 2s ease infinite;
+    margin-top: 20px;
+}
+
+@keyframes steamRise {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+    100% { transform: translateY(-40px) scale(1.5); opacity: 0; }
+}
+
+/* Slice Hint */
+.pizza-slice-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.95);
+    border: 4px solid #333;
+    border-radius: 15px;
+    padding: 15px 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 6px 0 #333;
+    animation: sliceHintPulse 1s ease infinite;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes sliceHintPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* Slice Line */
+.pizza-slice-line {
+    position: fixed;
+    height: 4px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    pointer-events: none;
+    z-index: 1000;
+    transform-origin: left center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Complete Message */
+.pizza-complete-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 6px solid #333;
+    border-radius: 30px;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 0 10px 0 #333, 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 3000;
+    animation: completeMessagePop 0.5s ease;
+}
+
+@keyframes completeMessagePop {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.pizza-complete-emoji {
+    font-size: 80px;
+    margin-bottom: 15px;
+}
+
+.pizza-complete-text {
+    font-size: 42px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 3px 3px 0 #333;
+}
+
+/* Ingredients Tray */
+.pizza-ingredient-tray {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    border: 3px dashed rgba(255,255,255,0.4);
+}
+
+.pizza-tray-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #333;
+}
+
+.pizza-ingredients-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pizza-ingredient {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #333;
+    box-shadow: 0 5px 0 #333, 0 8px 20px rgba(0,0,0,0.3);
+    cursor: grab;
+    transition: transform 0.1s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+.pizza-ingredient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #333, 0 11px 25px rgba(0,0,0,0.4);
+}
+
+.pizza-ingredient:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.pizza-ingredient.pizza-bounce-back {
+    animation: ingredientBounceBack 0.4s ease;
+}
+
+@keyframes ingredientBounceBack {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-20px); }
+    75% { transform: translateX(20px); }
+}
+
+.pizza-ingredient.pizza-dragging {
+    opacity: 0.9;
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* ===== RHYTHM GAME ===== */
+.rhythm-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+    gap: 30px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #2C3E50 0%, #34495E 50%, #2C3E50 100%);
+}
+
+/* Header */
+.rhythm-header {
+    text-align: center;
+    padding: 20px;
+}
+
+.rhythm-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.rhythm-icon {
+    font-size: 40px;
+    animation: rhythmBounce 1s ease infinite;
+}
+
+.rhythm-icon:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes rhythmBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(10deg); }
+}
+
+.rhythm-title-text {
+    font-size: 42px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 3px 3px 0 #333;
+}
+
+.rhythm-level-info {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    font-size: 24px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0 #333;
+    font-weight: bold;
+}
+
+.rhythm-mode {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+.rhythm-level {
+    background: rgba(255,215,0,0.3);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+/* Drum Kit */
+.drum-kit {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 30px;
+    border: 3px dashed rgba(255,255,255,0.3);
+}
+
+/* Individual Drum */
+.drum {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 
+        0 8px 0 #333,
+        0 15px 40px rgba(0,0,0,0.4),
+        inset 0 -10px 20px rgba(0,0,0,0.2);
+    transition: all 0.1s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.drum:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 13px 0 #333,
+        0 20px 50px rgba(0,0,0,0.5),
+        inset 0 -10px 20px rgba(0,0,0,0.2);
+}
+
+.drum:active {
+    transform: translateY(3px);
+    box-shadow: 
+        0 5px 0 #333,
+        0 10px 30px rgba(0,0,0,0.3),
+        inset 0 -10px 20px rgba(0,0,0,0.2);
+}
+
+.drum-active {
+    animation: drumPulse 0.2s ease;
+    transform: scale(1.1);
+}
+
+@keyframes drumPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1.1); }
+}
+
+.drum-highlight {
+    animation: drumHighlight 0.3s ease;
+    box-shadow: 
+        0 0 30px rgba(255,255,255,0.8),
+        0 8px 0 #333,
+        0 15px 40px rgba(0,0,0,0.4);
+}
+
+@keyframes drumHighlight {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(255,255,255,0); }
+    50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(255,255,255,1); }
+    100% { transform: scale(1); box-shadow: 0 0 30px rgba(255,255,255,0.8); }
+}
+
+.drum-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.drum-shake {
+    animation: drumShake 0.5s ease;
+}
+
+@keyframes drumShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+    20%, 40%, 60%, 80% { transform: translateX(8px); }
+}
+
+/* Drum Surface */
+.drum-surface {
+    font-size: 50px;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Drum Animal */
+.drum-animal {
+    position: absolute;
+    top: -30px;
+    font-size: 45px;
+    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.2s ease;
+}
+
+.drum-animal-playing {
+    animation: animalPlay 0.2s ease;
+}
+
+@keyframes animalPlay {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1) rotate(-10deg); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+.drum-animal-celebrate {
+    animation: animalCelebrate 0.5s ease infinite;
+}
+
+@keyframes animalCelebrate {
+    0%, 100% { transform: translateY(0) rotate(-15deg); }
+    50% { transform: translateY(-15px) rotate(15deg); }
+}
+
+/* Drum Label */
+.drum-label {
+    position: absolute;
+    bottom: -35px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #333;
+    white-space: nowrap;
+}
+
+/* Mode Selector */
+.rhythm-mode-selector {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.rhythm-mode-btn {
+    padding: 15px 30px;
+    font-size: 22px;
+    font-weight: bold;
+    background: #fff;
+    border: 4px solid #333;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #333;
+    transition: all 0.15s ease;
+}
+
+.rhythm-mode-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #333;
+}
+
+.rhythm-mode-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #333;
+}
+
+.rhythm-mode-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #333;
+}
+
+/* Musical Particles */
+.music-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    animation: particleFloat 1.5s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-150px) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Celebration */
+.rhythm-celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6347 100%);
+    border: 6px solid #333;
+    border-radius: 30px;
+    padding: 50px 70px;
+    text-align: center;
+    box-shadow: 0 10px 0 #333, 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 3000;
+    animation: rhythmCelebrationPop 0.5s ease;
+}
+
+@keyframes rhythmCelebrationPop {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.rhythm-celebration-animals {
+    font-size: 70px;
+    margin-bottom: 20px;
+    animation: animalsDance 0.5s ease infinite;
+}
+
+@keyframes animalsDance {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.rhythm-celebration-text {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 3px 3px 0 #333;
+    margin-bottom: 15px;
+}
+
+.rhythm-celebration-stars {
+    font-size: 50px;
+    animation: starsTwinkle 1s ease infinite;
+}
+
+@keyframes starsTwinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* ===== LABYRINTH GAME ===== */
+.maze-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+    min-height: 100vh;
+}
+
+/* Header */
+.maze-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px 30px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    border: 3px dashed rgba(255,255,255,0.4);
+}
+
+.maze-level-info {
+    text-align: left;
+}
+
+.maze-level-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #333;
+}
+
+.maze-instruction {
+    font-size: 18px;
+    color: #ffd700;
+    text-shadow: 2px 2px 0 #333;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.maze-goal-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 40px;
+}
+
+.maze-animal-preview {
+    background: #fff;
+    border: 4px solid #333;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 4px 0 #333;
+}
+
+.maze-arrow {
+    font-size: 30px;
+}
+
+.maze-food-preview {
+    background: #fff;
+    border: 4px solid #333;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 4px 0 #333;
+    animation: foodPulse 2s ease infinite;
+}
+
+@keyframes foodPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Maze Container */
+.maze-container {
+    position: relative;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    border: 3px dashed rgba(255,255,255,0.3);
+}
+
+/* Maze Grid */
+.maze-grid {
+    display: grid;
+    gap: 4px;
+    background: #333;
+    padding: 8px;
+    border-radius: 15px;
+    box-shadow: 0 10px 0 #222, 0 15px 40px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* Maze Cells */
+.maze-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.maze-wall {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
+    border: 2px solid #654321;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.maze-wall-shake {
+    animation: wallShake 0.3s ease;
+}
+
+@keyframes wallShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}
+
+.maze-path {
+    background: linear-gradient(135deg, #F5DEB3 0%, #FFE4B5 50%, #F5DEB3 100%);
+    border: 2px solid #DEB887;
+}
+
+/* Trail */
+.maze-trail {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255,215,0,0.6) 0%, rgba(255,165,0,0.4) 100%);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+/* Player */
+.maze-player {
+    position: absolute;
+    font-size: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 4px solid #333;
+    border-radius: 50%;
+    box-shadow: 0 4px 0 #333, 0 6px 15px rgba(0,0,0,0.3);
+    z-index: 10;
+    transition: all 0.2s ease;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+.maze-player:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 0 #333, 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.maze-player:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.maze-player-boing {
+    animation: playerBoing 0.3s ease;
+}
+
+@keyframes playerBoing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.8) rotate(10deg); }
+}
+
+/* Goal */
+.maze-goal {
+    font-size: 40px;
+    animation: goalBounce 1s ease infinite;
+    filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));
+}
+
+@keyframes goalBounce {
+    0%, 100% { transform: scale(1) rotate(-5deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Celebration */
+.maze-celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 6px solid #333;
+    border-radius: 30px;
+    padding: 50px 70px;
+    text-align: center;
+    box-shadow: 0 10px 0 #333, 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 3000;
+    animation: celebrationPop 0.5s ease;
+}
+
+@keyframes celebrationPop {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.maze-celebration-animal {
+    font-size: 80px;
+    margin-bottom: 10px;
+    animation: animalCelebrate 0.5s ease infinite alternate;
+}
+
+@keyframes animalCelebrate {
+    0% { transform: translateY(0) rotate(-10deg); }
+    100% { transform: translateY(-10px) rotate(10deg); }
+}
+
+.maze-celebration-food {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.maze-celebration-text {
+    font-size: 42px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 3px 3px 0 #333;
+}
+
 /* ===== RESPONSIVE - TABLET PORTRAIT ===== */
 @media (max-width: 900px) {
     .games-grid {
@@ -1639,7 +2605,94 @@ html, body {
     .hungry-instruction {
         font-size: 24px;
     }
-}
+    
+    /* Rhythm Game - Tablet */
+    .rhythm-wrapper {
+        padding: 25px;
+        gap: 25px;
+    }
+    
+    .rhythm-title-text {
+        font-size: 36px;
+    }
+    
+    .rhythm-icon {
+        font-size: 35px;
+    }
+    
+    .rhythm-level-info {
+        font-size: 20px;
+        gap: 15px;
+    }
+    
+    .drum-kit {
+        gap: 25px;
+        padding: 15px;
+    }
+    
+    .drum {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .drum-surface {
+        font-size: 42px;
+    }
+    
+    .drum-animal {
+        font-size: 38px;
+        top: -25px;
+    }
+    
+    .drum-label {
+        font-size: 12px;
+        bottom: -30px;
+    }
+    
+    .rhythm-mode-btn {
+        padding: 12px 25px;
+        font-size: 20px;
+    }
+    
+    /* Labyrinth Game - Tablet */
+    .maze-wrapper {
+        padding: 25px;
+    }
+    
+    .maze-header {
+        max-width: 500px;
+        padding: 15px 25px;
+    }
+    
+    .maze-level-number {
+        font-size: 24px;
+    }
+    
+    .maze-instruction {
+        font-size: 16px;
+    }
+    
+    .maze-goal-preview {
+        font-size: 35px;
+    }
+    
+    .maze-animal-preview,
+    .maze-food-preview {
+        padding: 8px;
+        border-width: 3px;
+    }
+    
+    .maze-celebration {
+        padding: 40px 50px;
+    }
+    
+    .maze-celebration-animal {
+        font-size: 70px;
+    }
+    
+    .maze-celebration-text {
+        font-size: 36px;
+    }
 
 /* ===== RESPONSIVE - MOBILE LANDSCAPE (COMPACT) ===== */
 @media (max-height: 500px) and (orientation: landscape) {
@@ -1929,8 +2982,126 @@ html, body {
     .hungry-food-area {
         padding: 10px;
     }
+
+    /* Rhythm Game - Mobile Landscape */
+    .rhythm-wrapper {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .rhythm-title-text {
+        font-size: 24px;
+    }
+
+    .rhythm-icon {
+        font-size: 25px;
+    }
+
+    .rhythm-level-info {
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    .drum-kit {
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .drum {
+        width: 85px;
+        height: 85px;
+    }
+
+    .drum-surface {
+        font-size: 30px;
+    }
+
+    .drum-animal {
+        font-size: 28px;
+        top: -20px;
+    }
+
+    .drum-label {
+        font-size: 9px;
+        bottom: -22px;
+    }
+
+    .rhythm-mode-selector {
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .rhythm-mode-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+        border-width: 3px;
+        border-radius: 10px;
+    }
+
+    .rhythm-celebration {
+        padding: 25px 35px;
+    }
+
+    .rhythm-celebration-animals {
+        font-size: 45px;
+    }
+
+    .rhythm-celebration-text {
+        font-size: 24px;
+    }
+
+    .rhythm-celebration-stars {
+        font-size: 35px;
+    }
+
+    /* Labyrinth Game - Mobile Landscape */
+    .maze-wrapper {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .maze-header {
+        padding: 8px 15px;
+        max-width: 350px;
+    }
+
+    .maze-level-number {
+        font-size: 16px;
+    }
+
+    .maze-instruction {
+        font-size: 12px;
+    }
+
+    .maze-goal-preview {
+        font-size: 28px;
+        gap: 5px;
+    }
+
+    .maze-animal-preview,
+    .maze-food-preview {
+        padding: 5px;
+        border-width: 2px;
+        border-radius: 10px;
+    }
+
+    .maze-celebration {
+        padding: 25px 35px;
+    }
+
+    .maze-celebration-animal {
+        font-size: 50px;
+    }
+
+    .maze-celebration-food {
+        font-size: 40px;
+    }
+
+    .maze-celebration-text {
+        font-size: 28px;
+    }
 }
-    
+
     .start-content p {
         font-size: 16px;
         margin-bottom: 20px;
@@ -2095,12 +3266,185 @@ html, body {
     }
     
     /* Hungry Animals - Mobile Portrait */
-    .hungry-animal {
-        width: 80px;
-        height: 80px;
-        font-size: 50px;
-        border-width: 3px;
+    .hungry-heart {
+        font-size: 24px;
     }
+
+    /* Pizza Game - Mobile Portrait */
+    .pizza-wrapper {
+        padding: 15px;
+    }
+
+    .pizza-customer {
+        width: 70px;
+        height: 70px;
+        font-size: 45px;
+    }
+
+    .pizza-speech-bubble {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+
+    .pizza-model-box {
+        width: 120px;
+        height: 120px;
+    }
+
+    .pizza-base {
+        width: 280px;
+        height: 280px;
+    }
+
+    .pizza-ghost-shadow,
+    .pizza-placed-ingredient {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+    }
+
+    .pizza-ingredient {
+        width: 60px;
+        height: 60px;
+        font-size: 36px;
+    }
+
+    .pizza-ingredients-container {
+        gap: 12px;
+    }
+
+    .pizza-cook-button {
+        padding: 15px 30px;
+        font-size: 22px;
+    }
+
+    .pizza-complete-message {
+        font-size: 36px;
+    }
+
+    .pizza-complete-emoji {
+        font-size: 60px;
+    }
+
+    .pizza-slice-hint {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+
+    /* Rhythm Game - Mobile Portrait */
+    .rhythm-wrapper {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .rhythm-title {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rhythm-title-text {
+        font-size: 28px;
+    }
+
+    .rhythm-icon {
+        font-size: 30px;
+    }
+
+    .rhythm-level-info {
+        flex-direction: column;
+        font-size: 18px;
+        gap: 10px;
+    }
+
+    .drum-kit {
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .drum {
+        width: 110px;
+        height: 110px;
+    }
+
+    .drum-surface {
+        font-size: 38px;
+    }
+
+    .drum-animal {
+        font-size: 32px;
+        top: -22px;
+    }
+
+    .drum-label {
+        font-size: 11px;
+        bottom: -28px;
+    }
+
+    .rhythm-mode-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rhythm-mode-btn {
+        padding: 12px 25px;
+        font-size: 18px;
+    }
+
+    .rhythm-celebration {
+        padding: 35px 45px;
+    }
+
+    .rhythm-celebration-animals {
+        font-size: 55px;
+    }
+
+    .rhythm-celebration-text {
+        font-size: 28px;
+    }
+
+    .rhythm-celebration-stars {
+        font-size: 40px;
+    }
+
+    /* Labyrinth Game - Mobile Portrait */
+    .maze-wrapper {
+        padding: 15px;
+    }
+
+    .maze-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .maze-level-number {
+        font-size: 20px;
+    }
+
+    .maze-instruction {
+        font-size: 14px;
+    }
+
+    .maze-goal-preview {
+        font-size: 32px;
+    }
+
+    .maze-celebration {
+        padding: 30px 40px;
+    }
+
+    .maze-celebration-animal {
+        font-size: 60px;
+    }
+
+    .maze-celebration-food {
+        font-size: 45px;
+    }
+
+    .maze-celebration-text {
+        font-size: 32px;
+    }
+}
     
     .hungry-animal-label {
         font-size: 14px;

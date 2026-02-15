@@ -19,6 +19,9 @@ import MemoryGame from './games/MemoryGame.js';
 import MoleGame from './games/MoleGame.js';
 import DrawingPadGame from './games/DrawingPad.js';
 import HungryAnimalsGame from './games/HungryAnimals.js';
+import PizzaGame from './games/PizzaGame.js';
+import LabyrinthGame from './games/LabyrinthGame.js';
+import RhythmGame from './games/RhythmGame.js';
 
 class App {
     constructor() {
@@ -47,6 +50,9 @@ class App {
         this.registerGame(new MoleGame());
         this.registerGame(new DrawingPadGame());
         this.registerGame(new HungryAnimalsGame());
+        this.registerGame(new PizzaGame());
+        this.registerGame(new LabyrinthGame());
+        this.registerGame(new RhythmGame());
 
         // Setup event listeners
         this.setupEventListeners();
